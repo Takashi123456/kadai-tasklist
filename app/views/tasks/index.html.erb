@@ -1,14 +1,38 @@
-<h1>タスク一覧</h1>
+<% if logged_in? %>
+ <h1>タスク一覧</h1>
+  <p>ログイン完了ユーザー：　<%= current_user.name %></p>
 
-<ul>
-    
-<% @task.each do |t| %>
- <li><%= link_to t.id, t %>:<%= t.status %> &gt; <%= t.content %></li>
+  <table class="table">
+   <thead>
+    <tr>
+     <th class="text-center">id</th>
+     <th class="text-center">ステータス</th>
+     <th class="text-center">タスク</th>
+    </tr>
+   </thead>
+   
+   <tbody>
+     <% @task.each do |t| %>
+       <tr>
+       <!-- リンク先 としてtのようにModelのインスタンス（レコード）を渡すと、自動的にそのインスタンスのshowアクションへとリンクされるようになります。-->
+       <td class="text-center"><%= link_to t.id, t %></td>
+       <td class="text-center"><%= t.status %></td>
+       <td class="text-center"><%= t.content %></td>
+      </tr>
+     <% end %>
+   </tbody>
+  </table>
+  
+  <%== pagy_bootstrap_nav(@pagy) %>
+  <%= link_to '新規タスクの投稿', new_task_path, class: "btn btn-primary" %>
  
- <% end %>
- 
-</ul>
-
-<%== pagy_nav(@pagy) %>
-
- <%= link_to '新しくタスクを作成する',new_task_path %>
+<% else %>
+  <div class="bg-secondary p-3 p-sm-5 my-4 rounded">
+   <div class="text-center text-white">
+    <h1>Welcom to the TASKLIST</h1>
+    <%= link_to 'Sign up now!', signup_path, class: 'btn btn-primary btn-lg' %>
+    <%= link_to 'Log in',login_path, class:'btn btn-lg btn-block btn-light' %>
+   </div>
+  </div>
+<% end %>
+  

@@ -1,0 +1,29 @@
+<header class"mb-4">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">TaskList</a>
+      
+      <!-- ハンバーガーボタン追加 -->
+      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav-bar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- メニュー項目 -->
+      <div class="collapse navbar-collapse justify-content-end" id="nav-bar">
+        <% if logged_in? %>
+          <ul class="navbar-nav">
+            <li class="nav-item"><%= link_to '新規タスクの追加', new_task_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'Logout', logout_path, class: 'nav-link' %></li>
+          </ul>
+        <% else %>
+            <ul class="navbar-nav">
+            <li class="nav-item"><%= link_to '新規タスクの追加', new_task_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'Signup', signup_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'Login', login_path, class: 'nav-link' %></li>
+          </ul>
+        <% end %>
+      </div>
+
+    </div>
+  </nav>
+</header>
