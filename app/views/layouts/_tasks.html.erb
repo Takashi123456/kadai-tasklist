@@ -1,0 +1,20 @@
+<% if task.any? %>
+  <ul class="list-unstyled mt-2">
+    <% task.each do |task| %>  
+      <li class="d-flex">
+        <img class="rounded me-2 mb-5" src="<%= gravatar_url(task.user, { size: 64 }) %>" alt="">
+        <div>
+          <div>
+            <p><%= task.user.name %><span class="text-muted">posted at <%= task.created_at %></span>
+          </div>
+          <div>
+            <p>ステータス:<%= task.status %></p>
+          </div>
+          <div>
+            <p>タスク:<%= task.content %></p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
